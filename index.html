@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AttendX Pro | Pure CSS</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">
+                <h1>Attend<span>X</span></h1>
+                <p id="date-display" class="date-text">--</p>
+            </div>
+            <div class="clock-box">
+                <span id="clock-display">00:00:00</span>
+            </div>
+        </header>
+
+        <!-- Main Form -->
+        <div class="glass-card">
+            <div class="card-header">
+                <div class="accent-line"></div>
+                <h2>Student Entry</h2>
+            </div>
+            
+            <form id="att-form">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="name" placeholder="Abdul Manaf Ali" required class="input-pill">
+                </div>
+                <div class="form-group">
+                    <label>Index Number</label>
+                    <input type="text" id="index" placeholder="2425-XXXX" required class="input-pill">
+                </div>
+                <button type="submit" class="btn-neon">Check In</button>
+            </form>
+        </div>
+
+        <!-- Activity Feed -->
+        <div class="activity-section">
+            <div class="activity-header">
+                <h3>Recent Activity</h3>
+                <span id="counter" class="count-badge">0 logged</span>
+            </div>
+            <div id="recent-list" style="display: flex; flex-direction: column; gap: 0.75rem;"></div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-actions">
+            <button onclick="requestAdminAction('export')" class="btn-export">
+                <span style="font-size: 1.2rem">📄</span> Export Report
+            </button>
+            <button onclick="requestAdminAction('reset')" class="btn-reset">🗑️</button>
+        </div>
+    </div>
+
+    <!-- Success View -->
+    <div id="success-view" class="overlay">
+        <div class="overlay-card">
+            <div class="overlay-icon">⚡</div>
+            <h3>SUCCESS</h3>
+            <p>Hand over the device</p>
+            <button onclick="closeOverlay('success-view')" class="btn-primary-neon">Continue</button>
+        </div>
+    </div>
+
+    <!-- Admin Password View -->
+    <div id="admin-view" class="overlay">
+        <div class="overlay-card">
+            <div class="overlay-icon">🔐</div>
+            <h3 id="admin-title">VERIFY ADMIN</h3>
+            <p id="admin-subtitle">Enter password to proceed</p>
+            <input type="password" id="admin-password" placeholder="••••••••" class="input-pill" style="text-align: center; margin-bottom: 1rem;">
+            <button onclick="handleAdminVerification()" class="btn-primary-neon" style="background: var(--primary); color: #fff;">Verify Action</button>
+            <button onclick="closeOverlay('admin-view')" class="btn-secondary">Cancel</button>
+        </div>
+    </div>
+    <script src="script.js"></script>  
+
+</body>
+</html>
